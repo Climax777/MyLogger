@@ -1,0 +1,28 @@
+Copyright 2012 Pieter Jordaan
+
+Distributed under the GNU Lesser General Public License
+
+This file is part of MyLogger.
+
+MyLogger is free software: you can redistribute it and/or modify
+it under the terms of the GNU Lesser General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+MyLogger is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Lesser General Public License for more details.
+
+You should have received a copy of the GNU Lesser General Public License
+along with MyLogger.  If not, see <http://www.gnu.org/licenses/>.
+
+
+********************************************************************************
+How to use in you project:
+- copy logger.hpp and logger.cpp to your project folder.
+- make sure boost shared_ptr and boost date_time is available
+- see test.cpp to see examples of using the library
+
+Contact me: Pieter Jordaan at pieterwjordaanpc@gmail.com for any queries
+
