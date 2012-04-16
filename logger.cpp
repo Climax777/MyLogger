@@ -73,7 +73,7 @@ void Logger::Log(LogSeverity severity, string message, string file, int line,
 				<< boost::posix_time::to_iso_extended_string(
 						boost::posix_time::microsec_clock::local_time())
 				<< "] @ " << function << " in " << file << "(" << line << ") - "
-				<< " " << LogSeverityToString(severity) << " " << message
+				<< "<" << LogSeverityToString(severity) << "> " << message
 				<< endl;
 		string logentry = ss.str();
 		for (list<boost::shared_ptr<LogBackend> >::iterator iter =

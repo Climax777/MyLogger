@@ -148,10 +148,10 @@ public:
 		return s_instance;
 	}
 	boost::shared_ptr<LogBackend> AddOutputStream(ostream& stream,
-			LogSeverity severity = LogWarning);
+			LogSeverity severity = LogAll);
 	void RemoveOutputStream(ostream& stream);
 	boost::shared_ptr<LogBackend> AddLogFileOutputStream(string filename,
-			bool append = true, LogSeverity severity = LogWarning);
+			bool append = true, LogSeverity severity = LogAll);
 
 	inline void AlwaysFlushStreams(bool enable) {
 		m_always_flush = enable;
@@ -196,11 +196,17 @@ private:
 #define LOG_ERROR_N(modulus, message) {static unsigned int counter = 0; counter ++; if(counter % modulus == 0) chreosis::Logger::instance()->Log(chreosis::Logger::LogError, STRSTREAM(message), __FILE__, __LINE__, __FUNCTION__);}
 #define LOG_WARNING(message) chreosis::Logger::instance()->Log(chreosis::Logger::LogSeverity::LogWarning, STRSTREAM(message), __FILE__, __LINE__, __FUNCTION__)
 #define LOG_WARNING_N(modulus, message) {static unsigned int counter = 0; counter ++; if(counter % modulus == 0) chreosis::Logger::instance()->Log(chreosis::Logger::LogWarning, STRSTREAM(message), __FILE__, __LINE__, __FUNCTION__);}
-#define LOG_NOTE(message) chreosis::Logger::instance()->Log(chreosis::Logger::LogSeverity::LogNote, STRSTREAM(message), __FILE__, __LINE__, __FUNCTION__)
-#define LOG_NOTE_N(modulus, message) {static unsigned int counter = 0; counter ++; if(counter % modulus == 0) chreosis::Logger::instance()->Log(chreosis::Logger::LogNote, STRSTREAM(message), __FILE__, __LINE__, __FUNCTION__);}
+#define LOG_NOTICE(message) chreosis::Logger::instance()->Log(chreosis::Logger::LogSeverity::LogNotice, STRSTREAM(message), __FILE__, __LINE__, __FUNCTION__)
+#define LOG_NOTICE_N(modulus, message) {static unsigned int counter = 0; counter ++; if(counter % modulus == 0) chreosis::Logger::instance()->Log(chreosis::Logger::LogNotice, STRSTREAM(message), __FILE__, __LINE__, __FUNCTION__);}
 #define LOG_INFO(message) chreosis::Logger::instance()->Log(chreosis::Logger::LogSeverity::LogInfo, STRSTREAM(message), __FILE__, __LINE__, __FUNCTION__)
 #define LOG_INFO_N(modulus, message) {static unsigned int counter = 0; counter ++; if(counter % modulus == 0) chreosis::Logger::instance()->Log(chreosis::Logger::LogInfo, STRSTREAM(message), __FILE__, __LINE__, __FUNCTION__);}
+
+#ifdef _DEBUG
 #define LOG_DEBUG(message) chreosis::Logger::instance()->Log(chreosis::Logger::LogSeverity::LogDebug, STRSTREAM(message), __FILE__, __LINE__, __FUNCTION__)
 #define LOG_DEBUG_N(modulus, message) {static unsigned int counter = 0; counter ++; if(counter % modulus == 0) chreosis::Logger::instance()->Log(chreosis::Logger::LogDebug STRSTREAM(message), __FILE__, __LINE__, __FUNCTION__);}
+#else
+#define LOG_DEBUG
+#define LOG_DEBUG_N
+#endif
 
 #endif /* LOGGER_HPP_ */
