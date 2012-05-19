@@ -32,7 +32,7 @@
 #include <utility>
 #include <string>
 #include <fstream>
-#include <strstream>
+#include <sstream>
 #include <boost/shared_ptr.hpp>
 #include <boost/enable_shared_from_this.hpp>
 using namespace std;
@@ -180,33 +180,33 @@ private:
 
 	bool m_always_flush;
 	LogSeverity m_global_severity;
-	list<boost::shared_ptr<LogBackend> > m_output_streams;
+	list<boost::shared_ptr<LogBackend>> m_output_streams;
 };
 }
 
-#define LOG(severity, message) chreosis::Logger::instance()->Log((chreosis::Logger::LogSeverity)severity, STRSTREAM(message), __FILE__, __LINE__, __FUNCTION__)
-#define LOG_N(modulus, severity, message) {static unsigned int counter = 0; counter ++; if(counter % modulus == 0) chreosis::Logger::instance()->Log((chreosis::Logger::LogSeverity)severity, STRSTREAM(message), __FILE__, __LINE__, __FUNCTION__);}
-#define LOG_EMERGENCY(message) chreosis::Logger::instance()->Log(chreosis::Logger::LogSeverity::LogEmergency, STRSTREAM(message), __FILE__, __LINE__, __FUNCTION__)
-#define LOG_EMERGENCY_N(modulus, message) {static unsigned int counter = 0; counter ++; if(counter % modulus == 0) chreosis::Logger::instance()->Log(chreosis::Logger::LogEmergency, STRSTREAM(message), __FILE__, __LINE__, __FUNCTION__);}
-#define LOG_ALERT(message) chreosis::Logger::instance()->Log(chreosis::Logger::LogSeverity::LogAlert, STRSTREAM(message), __FILE__, __LINE__, __FUNCTION__)
-#define LOG_ALERT_N(modulus, message) {static unsigned int counter = 0; counter ++; if(counter % modulus == 0) chreosis::Logger::instance()->Log(chreosis::Logger::LogAlert, STRSTREAM(message), __FILE__, __LINE__, __FUNCTION__);}
-#define LOG_CRITICAL(message) chreosis::Logger::instance()->Log(chreosis::Logger::LogSeverity::LogCritical, STRSTREAM(message), __FILE__, __LINE__, __FUNCTION__)
-#define LOG_CRITICAL_N(modulus, message) {static unsigned int counter = 0; counter ++; if(counter % modulus == 0) chreosis::Logger::instance()->Log(chreosis::Logger::LogCritical, STRSTREAM(message), __FILE__, __LINE__, __FUNCTION__);}
-#define LOG_ERROR(message) chreosis::Logger::instance()->Log(chreosis::Logger::LogSeverity::LogError, STRSTREAM(message), __FILE__, __LINE__, __FUNCTION__)
-#define LOG_ERROR_N(modulus, message) {static unsigned int counter = 0; counter ++; if(counter % modulus == 0) chreosis::Logger::instance()->Log(chreosis::Logger::LogError, STRSTREAM(message), __FILE__, __LINE__, __FUNCTION__);}
-#define LOG_WARNING(message) chreosis::Logger::instance()->Log(chreosis::Logger::LogSeverity::LogWarning, STRSTREAM(message), __FILE__, __LINE__, __FUNCTION__)
-#define LOG_WARNING_N(modulus, message) {static unsigned int counter = 0; counter ++; if(counter % modulus == 0) chreosis::Logger::instance()->Log(chreosis::Logger::LogWarning, STRSTREAM(message), __FILE__, __LINE__, __FUNCTION__);}
-#define LOG_NOTICE(message) chreosis::Logger::instance()->Log(chreosis::Logger::LogSeverity::LogNotice, STRSTREAM(message), __FILE__, __LINE__, __FUNCTION__)
-#define LOG_NOTICE_N(modulus, message) {static unsigned int counter = 0; counter ++; if(counter % modulus == 0) chreosis::Logger::instance()->Log(chreosis::Logger::LogNotice, STRSTREAM(message), __FILE__, __LINE__, __FUNCTION__);}
-#define LOG_INFO(message) chreosis::Logger::instance()->Log(chreosis::Logger::LogSeverity::LogInfo, STRSTREAM(message), __FILE__, __LINE__, __FUNCTION__)
-#define LOG_INFO_N(modulus, message) {static unsigned int counter = 0; counter ++; if(counter % modulus == 0) chreosis::Logger::instance()->Log(chreosis::Logger::LogInfo, STRSTREAM(message), __FILE__, __LINE__, __FUNCTION__);}
+#define MYLOG(severity, message) chreosis::Logger::instance()->Log((chreosis::Logger::LogSeverity)severity, STRSTREAM(message), __FILE__, __LINE__, __FUNCTION__)
+#define MYLOG_N(modulus, severity, message) {static unsigned int counter = 0; counter ++; if(counter % modulus == 0) chreosis::Logger::instance()->Log(((chreosis::Logger::LogSeverity)chreosis::Logger::LogSeverity::LogSeverity)severity, STRSTREAM(message), __FILE__, __LINE__, __FUNCTION__);}
+#define MYLOG_EMERGENCY(message) chreosis::Logger::instance()->Log((chreosis::Logger::LogSeverity)chreosis::Logger::LogSeverity::LogEmergency, STRSTREAM(message), __FILE__, __LINE__, __FUNCTION__)
+#define MYLOG_EMERGENCY_N(modulus, message) {static unsigned int counter = 0; counter ++; if(counter % modulus == 0) chreosis::Logger::instance()->Log((chreosis::Logger::LogSeverity)chreosis::Logger::LogSeverity::LogEmergency, STRSTREAM(message), __FILE__, __LINE__, __FUNCTION__);}
+#define MYLOG_ALERT(message) chreosis::Logger::instance()->Log((chreosis::Logger::LogSeverity)chreosis::Logger::LogSeverity::LogAlert, STRSTREAM(message), __FILE__, __LINE__, __FUNCTION__)
+#define MYLOG_ALERT_N(modulus, message) {static unsigned int counter = 0; counter ++; if(counter % modulus == 0) chreosis::Logger::instance()->Log((chreosis::Logger::LogSeverity)chreosis::Logger::LogSeverity::LogAlert, STRSTREAM(message), __FILE__, __LINE__, __FUNCTION__);}
+#define MYLOG_CRITICAL(message) chreosis::Logger::instance()->Log((chreosis::Logger::LogSeverity)chreosis::Logger::LogSeverity::LogCritical, STRSTREAM(message), __FILE__, __LINE__, __FUNCTION__)
+#define MYLOG_CRITICAL_N(modulus, message) {static unsigned int counter = 0; counter ++; if(counter % modulus == 0) chreosis::Logger::instance()->Log((chreosis::Logger::LogSeverity)chreosis::Logger::LogSeverity::LogCritical, STRSTREAM(message), __FILE__, __LINE__, __FUNCTION__);}
+#define MYLOG_ERROR(message) chreosis::Logger::instance()->Log((chreosis::Logger::LogSeverity)chreosis::Logger::LogSeverity::LogError, STRSTREAM(message), __FILE__, __LINE__, __FUNCTION__)
+#define MYLOG_ERROR_N(modulus, message) {static unsigned int counter = 0; counter ++; if(counter % modulus == 0) chreosis::Logger::instance()->Log((chreosis::Logger::LogSeverity)chreosis::Logger::LogSeverity::LogError, STRSTREAM(message), __FILE__, __LINE__, __FUNCTION__);}
+#define MYLOG_WARNING(message) chreosis::Logger::instance()->Log((chreosis::Logger::LogSeverity)chreosis::Logger::LogSeverity::LogWarning, STRSTREAM(message), __FILE__, __LINE__, __FUNCTION__)
+#define MYLOG_WARNING_N(modulus, message) {static unsigned int counter = 0; counter ++; if(counter % modulus == 0) chreosis::Logger::instance()->Log((chreosis::Logger::LogSeverity)chreosis::Logger::LogSeverity::LogWarning, STRSTREAM(message), __FILE__, __LINE__, __FUNCTION__);}
+#define MYLOG_NOTICE(message) chreosis::Logger::instance()->Log((chreosis::Logger::LogSeverity)chreosis::Logger::LogSeverity::LogNotice, STRSTREAM(message), __FILE__, __LINE__, __FUNCTION__)
+#define MYLOG_NOTICE_N(modulus, message) {static unsigned int counter = 0; counter ++; if(counter % modulus == 0) chreosis::Logger::instance()->Log((chreosis::Logger::LogSeverity)chreosis::Logger::LogSeverity::LogNotice, STRSTREAM(message), __FILE__, __LINE__, __FUNCTION__);}
+#define MYLOG_INFO(message) chreosis::Logger::instance()->Log((chreosis::Logger::LogSeverity)chreosis::Logger::LogSeverity::LogInfo, STRSTREAM(message), __FILE__, __LINE__, __FUNCTION__)
+#define MYLOG_INFO_N(modulus, message) {static unsigned int counter = 0; counter ++; if(counter % modulus == 0) chreosis::Logger::instance()->Log((chreosis::Logger::LogSeverity)chreosis::Logger::LogSeverity::LogInfo, STRSTREAM(message), __FILE__, __LINE__, __FUNCTION__);}
 
 #ifdef _DEBUG
-#define LOG_DEBUG(message) chreosis::Logger::instance()->Log(chreosis::Logger::LogSeverity::LogDebug, STRSTREAM(message), __FILE__, __LINE__, __FUNCTION__)
-#define LOG_DEBUG_N(modulus, message) {static unsigned int counter = 0; counter ++; if(counter % modulus == 0) chreosis::Logger::instance()->Log(chreosis::Logger::LogDebug STRSTREAM(message), __FILE__, __LINE__, __FUNCTION__);}
+#define MYLOG_DEBUG(message) chreosis::Logger::instance()->Log(chreosis::Logger::LogSeverity::LogDebug, STRSTREAM(message), __FILE__, __LINE__, __FUNCTION__)
+#define MYLOG_DEBUG_N(modulus, message) {static unsigned int counter = 0; counter ++; if(counter % modulus == 0) chreosis::Logger::instance()->Log(chreosis::Logger::LogDebug STRSTREAM(message), __FILE__, __LINE__, __FUNCTION__);}
 #else
-#define LOG_DEBUG
-#define LOG_DEBUG_N
+#define MYLOG_DEBUG(message)
+#define MYLOG_DEBUG_N(modulus, message)
 #endif
 
 #endif /* LOGGER_HPP_ */

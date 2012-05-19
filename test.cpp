@@ -24,9 +24,8 @@
  along with MyLogger.  If not, see <http://www.gnu.org/licenses/>.
  */
  
- #include "logger.hpp"
- 
- using namespace chreosis;
+#include "logger.hpp"
+using namespace chreosis;
 
 int main() {
 	Logger::instance()->setGlobalSeverity(chreosis::Logger::LogSeverity::LogAlert);
@@ -38,11 +37,12 @@ int main() {
 	chreosis::Logger::instance()->Log(chreosis::Logger::LogEmergency, STRSTREAM("whoo" << 123 << "fdsf"),__FILE__, __LINE__, __FUNCTION__ );
 	
 	// With Macro
-	LOG(chreosis::Logger::LogError, "Whooe" << " this" << " is " << "Awesome!!");
-	LOG_ERROR("Error occured");
+	MYLOG(chreosis::Logger::LogError, "Whooe" << " this" << " is " << "Awesome!!");
+	MYLOG_ERROR("Error occured " << true << " " << 9999);	
+	MYLOG_ALERT("Error occured " << true << " " << 9999);
 	int i = 0;
 	while(i < 50) {
-		LOG_ALERT_N(5, "every 5 times");
+		MYLOG_ALERT_N(5, "every 5 times");
 		i++;
 	}
 	return 0;

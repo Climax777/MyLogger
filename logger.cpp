@@ -58,7 +58,7 @@ boost::shared_ptr<LogBackend> Logger::AddLogFileOutputStream(string filename,
 }
 
 void Logger::FlushAllStreams() {
-	for (list<boost::shared_ptr<LogBackend> >::iterator iter =
+	for (auto iter =
 			m_output_streams.begin(); iter != m_output_streams.end(); ++iter) {
 		iter->get()->Flush();
 	}
@@ -72,15 +72,14 @@ void Logger::Log(LogSeverity severity, string message, string file, int line,
 		ss << "["
 				<< boost::posix_time::to_iso_extended_string(
 						boost::posix_time::microsec_clock::local_time())
-				<< "] @ " << function << " in " << file << "(" << line << ") - "
-				<< "<" << LogSeverityToString(severity) << "> " << message
-				<< endl;
+				<< "] <" << LogSeverityToString(severity) << "> @ " << function << " in " << file << "(" << line << ") - "
+				 << message;
 		string logentry = ss.str();
-		for (list<boost::shared_ptr<LogBackend> >::iterator iter =
+		for (auto iter =
 				m_output_streams.begin(); iter != m_output_streams.end();
 				++iter) {
 			if (iter->get()->m_verbosity_level >= (unsigned int) severity) {
-				*iter->get()->m_stream << logentry;
+				*iter->get()->m_stream << logentry << endl;
 				if (m_always_flush || iter->get()->m_always_flush)
 					iter->get()->Flush();
 			}
